@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="&#10;    width: 64px;&#10;    height: 64px;&#10;">
+  <defs>
+    <linearGradient id="arrow-gradient" gradientUnits="userSpaceOnUse" x1="10" y1="37.5" x2="60" y2="37.5">
+      <stop offset="20%" stop-color="#f471b5"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+  <text x="10" y="56" font-size="64" font-family="DM Sans, sans-serif" font-weight="700" fill="#f549a8">C</text>
+  
+  <g stroke="url(#arrow-gradient)" stroke-linecap="round">
+    <line x1="5" y1="32" x2="55" y2="32" stroke-width="4"/>
+    <line x1="59" y1="32" x2="48" y2="38" stroke-width="3"/>
+    <line x1="59" y1="32" x2="48" y2="26" stroke-width="3"/>
+  </g>
+</svg>
