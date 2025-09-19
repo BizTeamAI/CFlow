@@ -28,11 +28,13 @@ import {
   NOTE_NODE_MIN_WIDTH,
 } from "@/constants/constants";
 import { useGetBuildsQuery } from "@/controllers/API/queries/_builds";
+import Watermark from "@/components/common/watermark";
 import CustomLoader from "@/customization/components/custom-loader";
 import { track } from "@/customization/utils/analytics";
 import useAutoSaveFlow from "@/hooks/flows/use-autosave-flow";
 import useUploadFlow from "@/hooks/flows/use-upload-flow";
 import { useAddComponent } from "@/hooks/use-add-component";
+import { useLicenseStore } from "@/stores/licenseStore";
 import { nodeColorsName } from "@/utils/styleUtils";
 import { isSupportedNodeTypes } from "@/utils/utils";
 import GenericNode from "../../../../CustomNodes/GenericNode";
@@ -134,6 +136,10 @@ export default function Page({
   const updateCurrentFlow = useFlowStore((state) => state.updateCurrentFlow);
   const [selectionMenuVisible, setSelectionMenuVisible] = useState(false);
   const edgeUpdateSuccessful = useRef(true);
+
+  // License validation
+  const licenseInfo = useLicenseStore((state) => state.licenseInfo);
+  const isProVersion = licenseInfo.isValid && licenseInfo.isPro && !licenseInfo.isExpired;
 
   const isLocked = useFlowStore(
     useShallow((state) => state.currentFlow?.locked),
@@ -723,6 +729,8 @@ export default function Page({
             <UpdateAllComponents />
             <MemoizedBackground />
             {helperLineEnabled && <HelperLines helperLines={helperLines} />}
+            {/* Watermark for non-PRO version */}
+            {!isProVersion && <Watermark />}
           </ReactFlow>
           <div
             id="shadow-box"

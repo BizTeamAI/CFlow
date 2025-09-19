@@ -114,7 +114,6 @@ export const ForwardedIconComponent = memo(
                 className={className}
                 style={style}
                 ref={ref}
-                isDark={isDark}
                 data-testid={
                   dataTestId
                     ? dataTestId

@@ -787,6 +787,8 @@ export const AUTHORIZED_DUPLICATE_REQUESTS = [
   "/refresh",
   "/login",
   "/auto_login",
+  "/api/v1/license/status",
+  "/api/v1/system/cpu-cores",
 ];
 
 export const BROKEN_EDGES_WARNING =

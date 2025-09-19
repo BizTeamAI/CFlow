@@ -27,15 +27,33 @@ export default defineConfig(({ mode }) => {
 
   const port = Number(env.VITE_PORT) || PORT || 3000;
 
-  const proxyTargets = apiRoutes.reduce((proxyObj, route) => {
-    proxyObj[route] = {
+  // Start with specific license server endpoints (must come first!)
+  const proxyTargets: Record<string, any> = {};
+  
+  // License server specific endpoints
+  proxyTargets['^/api/v1/system/cpu-cores'] = {
+    target: "http://localhost:7861",
+    changeOrigin: true,
+    secure: false,
+    ws: true,
+  };
+
+  proxyTargets['^/api/v1/license/'] = {
+    target: "http://localhost:7861",
+    changeOrigin: true,
+    secure: false,
+    ws: true,
+  };
+
+  // General API routes (comes after specific ones)
+  apiRoutes.forEach(route => {
+    proxyTargets[route] = {
       target: target,
       changeOrigin: true,
       secure: false,
       ws: true,
     };
-    return proxyObj;
-  }, {});
+  });
 
   return {
     base: BASENAME || "",

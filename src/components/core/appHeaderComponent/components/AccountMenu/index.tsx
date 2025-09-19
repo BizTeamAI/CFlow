@@ -97,6 +97,19 @@ export const AccountMenu = () => {
               </span>
             </HeaderMenuItemButton>
 
+            <HeaderMenuItemButton
+              onClick={() => {
+                navigate("/license");
+              }}
+            >
+              <span
+                data-testid="menu_license_button"
+                id="menu_license_button"
+              >
+                License
+              </span>
+            </HeaderMenuItemButton>
+
             {isAdmin && !autoLogin && (
               <div>
                 <HeaderMenuItemButton

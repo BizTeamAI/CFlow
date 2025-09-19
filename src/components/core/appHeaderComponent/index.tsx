@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import CustomAccountMenu from "@/customization/components/custom-AccountMenu";
 import { useCustomNavigate } from "@/customization/hooks/use-custom-navigate";
 import useTheme from "@/customization/hooks/use-custom-theme";
-import useAlertStore from "@/stores/alertStore";
+import { useLicenseStore } from "@/stores/licenseStore";
 import FlowMenu from "./components/FlowMenu";
 
 export default function AppHeader(): JSX.Element {
@@ -12,6 +12,9 @@ export default function AppHeader(): JSX.Element {
   const [activeState, setActiveState] = useState<"notifications" | null>(null);
   const notificationRef = useRef<HTMLButtonElement | null>(null);
   const notificationContentRef = useRef<HTMLDivElement | null>(null);
+  const licenseInfo = useLicenseStore((state) => state.licenseInfo);
+  const isProVersion = licenseInfo.isValid && licenseInfo.isPro && !licenseInfo.isExpired;
+  
   useTheme();
 
   useEffect(() => {
@@ -50,6 +53,14 @@ export default function AppHeader(): JSX.Element {
         >
           <CFlowLogo className="h-6 w-6" />
         </Button>
+        {/* PRO Badge */}
+        {isProVersion && (
+          <div className="ml-1 flex items-center">
+            <span className="rounded-full bg-gradient-to-r from-blue-500 to-purple-600 px-2 py-0.5 text-xs font-bold text-white shadow-sm">
+              PRO
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Middle Section */}
